@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/lmartin214/ShareYourThoughts#readme",
   "dependencies": {
+    "dayjs": "^1.11.7",
     "express": "^4.18.2",
     "mongoose": "^6.8.1"
   },
