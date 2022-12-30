@@ -1,12 +1,12 @@
 const { Schema, model } = require("mongoose");
-const dayjs = require("dayjs");
+const dayjs = require("dayjs"); //For Date Stamps
 const reactionSchema = require("./Reaction");
 
-const thoughtSchema = new Schema(
+const thoughtSchema = new Schema(  //Schema for thoughts 
   {
     thoughtText: {
       type: String,
-      required: "Thought required!",
+      required: true,
       minlength: 1,
       maxlength: 280,
 
@@ -14,7 +14,7 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (timestamp) => dayjs(timestamp).format('YYYY-MM-DD HH:mm:ss'),
+      get: (timestamp) => dayjs(timestamp).format('YYYY-MM-DD HH:mm'),
     },
     username: {
       type: String,
@@ -25,12 +25,13 @@ const thoughtSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
+      getters: true
     },
     id: false,
   }
 );
 
-ThoughtSchema.virtual('reactionCount').get(function() {
+thoughtSchema.virtual('reactionCount').get(function() {  // Virtual property that tracks the thoughts reactions count
     return this.reactions.length;
   });
 
